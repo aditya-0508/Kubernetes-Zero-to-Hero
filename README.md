@@ -101,4 +101,29 @@ After a few mins, run the below command to verify the cluster installation.
 ```
 kops validate cluster demok8scluster.k8s.local
 ```
+# Check what's running
+kubectl get pods -n <namespace>
+kubectl get deployments
+kubectl get nodes
 
+# Dig into problems
+kubectl describe pod <pod-name>
+kubectl logs <pod-name> --tail=100
+kubectl logs <pod-name> -c <container-name>   # if multiple containers
+kubectl exec -it <pod-name> -- /bin/bash
+
+# Deploy and update
+kubectl apply -f deployment.yaml
+kubectl rollout status deployment <name>
+kubectl rollout undo deployment <name>
+kubectl rollout history deployment <name>
+
+# Scaling
+kubectl scale deployment <name> --replicas=5
+kubectl get hpa
+
+# Resource usage
+kubectl top pods
+kubectl top nodes
+
+The few top commands which u should know for sure 
